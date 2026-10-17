@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Landing Page & Booking</title>
+    <title>Business Site & Online Booking</title>
     <style>
         body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; color: #1e293b; background-color: #ffffff; line-height: 1.6; }
         
@@ -27,64 +27,66 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; text-align: left; }
         .card { background: #f8fafc; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; }
         
-        /* ================= POPUP MODAL STYLES ================= */
+        /* POPUP MODAL STYLES */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); z-index: 1000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; backdrop-filter: blur(4px); }
         .modal-overlay.active { display: flex; }
         
-        .modal-content { background: #ffffff; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 30px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); text-align: left; }
+        .modal-content { background: #ffffff; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 30px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); text-align: left; }
         .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #64748b; }
         .modal-close:hover { color: #0f172a; }
         
         /* Form Styling Inside Modal */
+        .booking-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 15px; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 5px; }
+        .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 5px; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
         
         .service-option { border: 2px solid #e2e8f0; border-radius: 6px; padding: 12px; margin-bottom: 10px; cursor: pointer; }
         .service-option.active { border-color: #2563eb; background: #eff6ff; }
-
-        @media (max-width: 600px) {
-            nav { padding: 15px 20px; }
-            .hero h1 { font-size: 28px; }
-            .modal-content { padding: 20px; }
+        
+        .summary-card { background: #0f172a; color: white; border-radius: 8px; padding: 20px; height: fit-content; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+        
+        @media (max-width: 768px) {
+            .booking-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION BAR -->
+    <!-- NAV BAR -->
     <nav>
-        <div class="logo">Company Name</div>
-        <button class="btn-primary" onclick="openBookingModal()">Book Now</button>
+        <div class="logo">Business Logo</div>
+        <button class="btn-primary" onclick="openBookingModal()">Book Appointment</button>
     </nav>
 
     <!-- LANDING HERO BANNER -->
     <section class="hero">
         <span class="section-tag">Section 1: Hero Banner</span>
         <div class="container">
-            <h1>Welcome to Our Professional Services</h1>
-            <p>We provide high-quality, reliable solutions tailored to your schedule. Schedule your appointment online in just a few clicks.</p>
-            <button class="btn-primary" style="padding: 16px 32px; font-size: 18px;" onclick="openBookingModal()">Book Appointment Now →</button>
+            <h1>Professional Services Scheduled on Your Time</h1>
+            <p>Fast, reliable service booking tailored to your convenience. Choose your service package, select an arrival slot, and confirm instantly.</p>
+            <button class="btn-primary" style="padding: 16px 32px; font-size: 18px;" onclick="openBookingModal()">Book an Appointment Now →</button>
         </div>
     </section>
 
-    <!-- COMPANY HIGHLIGHTS -->
+    <!-- HIGHLIGHTS & BENEFITS -->
     <section>
         <span class="section-tag">Section 2: Why Choose Us</span>
         <div class="container">
             <h2>Why Clients Choose Our Team</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>⚡ Fast & Easy Booking</h3>
-                    <p>Select your date, time slot, and service details instantly without endless call waiting.</p>
+                    <h3>⚡ Fast Online Booking</h3>
+                    <p>Select your date, time slot, and service details instantly without back-and-forth emails.</p>
                 </div>
                 <div class="card">
                     <h3>📅 Guaranteed Arrival Slots</h3>
-                    <p>We respect your time. Pick an arrival window that works seamlessly with your personal schedule.</p>
+                    <p>Pick exact arrival windows that fit seamlessly into your personal daily schedule.</p>
                 </div>
                 <div class="card">
-                    <h3>💳 Transparent Upfront Rates</h3>
-                    <p>Clear, upfront pricing with zero hidden fees or surprise costs upon job completion.</p>
+                    <h3>💳 Upfront Rates</h3>
+                    <p>Clear, transparent pricing with zero hidden fees or unexpected costs.</p>
                 </div>
             </div>
         </div>
@@ -100,86 +102,92 @@
         </div>
     </section>
 
-
-    <!-- ================= BOOKING POP-UP MODAL ================= -->
+    <!-- BOOKING MODAL WINDOW -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeBookingModal()">&times;</button>
-            
-            <span class="section-tag">Interactive Booking Modal</span>
-            <h2 style="margin-top: 10px; font-size: 22px;">Schedule Your Appointment</h2>
-            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Complete the form below to confirm your service slot.</p>
+            <span class="section-tag">Online Service Booking</span>
+            <h2 style="margin-top: 10px; margin-bottom: 5px;">Reserve Your Appointment Slot</h2>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Complete the fields below to schedule your appointment.</p>
 
-            <form>
-                <!-- STEP 1: SERVICE -->
-                <div class="form-group">
-                    <label>1. Select Service Package</label>
-                    <div class="service-option active">
-                        <strong>Standard Consultation</strong> — $50.00 (45 Mins)
-                    </div>
-                    <div class="service-option">
-                        <strong>Full Service Package</strong> — $150.00 (2 Hours)
-                    </div>
-                </div>
-
-                <!-- STEP 2: DATE & TIME -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="booking-grid">
+                <div>
+                    <!-- STEP 1 -->
                     <div class="form-group">
-                        <label>2. Select Date</label>
-                        <input type="date">
+                        <label>1. Choose a Service</label>
+                        <div class="service-option active">
+                            <strong>Standard Consultation</strong>
+                            <div style="font-size: 12px; color: #64748b;">1-on-1 meeting to discuss project scope.</div>
+                            <span style="color: #2563eb; font-weight: bold; font-size: 13px;">$50.00 • 45 mins</span>
+                        </div>
+                        <div class="service-option">
+                            <strong>Full Service Package</strong>
+                            <div style="font-size: 12px; color: #64748b;">Complete service implementation and setup.</div>
+                            <span style="color: #2563eb; font-weight: bold; font-size: 13px;">$150.00 • 2 Hours</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label>2. Select Date</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Time Slot</label>
+                            <select>
+                                <option>9:00 AM - 10:00 AM</option>
+                                <option>11:00 AM - 12:00 PM</option>
+                                <option>1:00 PM - 2:00 PM</option>
+                                <option>3:00 PM - 4:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="Jane">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Smith">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Preferred Time Slot</label>
-                        <select>
-                            <option>9:00 AM - 10:00 AM</option>
-                            <option>11:00 AM - 12:00 PM</option>
-                            <option>1:00 PM - 2:00 PM</option>
-                            <option>3:00 PM - 4:00 PM</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- STEP 3: CONTACT DETAILS -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" placeholder="Jane">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="jane@example.com">
                     </div>
                     <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="Smith">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="(555) 000-0000">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="jane@example.com">
+                <!-- SIDEBAR SUMMARY -->
+                <div>
+                    <div class="summary-card">
+                        <h3 style="margin-top: 0; font-size: 16px; border-bottom: 1px solid #334155; padding-bottom: 8px;">Booking Summary</h3>
+                        <div class="summary-line"><span>Service:</span><strong>Consultation</strong></div>
+                        <div class="summary-line"><span>Duration:</span><span>45 Mins</span></div>
+                        <div class="summary-line" style="border-top: 1px solid #334155; padding-top: 8px; font-weight: bold;">
+                            <span>Total Due:</span><span>$50.00</span>
+                        </div>
+                        <button type="button" class="btn-primary" style="width: 100%; margin-top: 15px; font-size: 14px;" onclick="alert('Appointment Request Submitted!')">Confirm Booking</button>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" placeholder="(555) 000-0000">
-                </div>
-
-                <button type="button" class="btn-primary" style="width: 100%; padding: 14px; margin-top: 10px;" onclick="alert('Appointment Request Submitted!')">Confirm & Book Appointment</button>
-            </form>
+            </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT FOR MODAL OPEN/CLOSE -->
     <script>
-        function openBookingModal() {
-            document.getElementById('bookingModal').classList.add('active');
-        }
-        function closeBookingModal() {
-            document.getElementById('bookingModal').classList.remove('active');
-        }
-        // Close modal if user clicks outside the content window
+        function openBookingModal() { document.getElementById('bookingModal').classList.add('active'); }
+        function closeBookingModal() { document.getElementById('bookingModal').classList.remove('active'); }
         window.onclick = function(event) {
             const modal = document.getElementById('bookingModal');
-            if (event.target === modal) {
-                closeBookingModal();
-            }
+            if (event.target === modal) { closeBookingModal(); }
         }
     </script>
 
